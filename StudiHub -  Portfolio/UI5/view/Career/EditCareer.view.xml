@@ -1,0 +1,221 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mosbach.StudiHub.controller.Career.EditCareer"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:vbm="sap.ui.vbm">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="pressNavBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://employee-lookup" visible="{= ${SessionModel>/myUserType} === 'ADMN'}" press="onAdminPanelPress" text="Nutzer verwalten" type="Attention"/>
+							<Button icon="sap-icon://business-card" press="onMyProfilePress" tooltip="Mein Profil" type="Ghost"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Stellenangebot bearbeiten:"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://delete" press="onDeletePress" text="Stellenangebot löschen" type="Reject"/>
+								<Button icon="sap-icon://save" press="onSavePress" text="Änderungen speichern" type="Ghost"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Daten zum Angebot" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Titel" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputHeader" required="true" value="{Title}" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Kategorie" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCategory" required="true" maxLength="32" value="{Category}" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Von - Bis" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DateRangeSelection id="dateRange" dateValue="{Begda}" secondDateValue="{Endda}" required="true" change="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Bildtyp" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<SegmentedButton width="100%" id="ImageType" selectedKey="{Imgtype}" selectionChange="onLiveChange">
+														<items>
+															<SegmentedButtonItem id="HeaderImage" text="Kleines Bild" />
+															<SegmentedButtonItem id="BackgroundImage" text="Großes Bild" key="Standard" />
+														</items>
+													</SegmentedButton>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Link zum Bild" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputImage" value="{Imgurl}" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+									<form:FormContainer title="Adressdaten" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Unternehmen" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCompany" value="{Uname}" editable="false" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Straße" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputStreet" value="{Street}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Ort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCity" value="{City}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Postleitzahl" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputPostcode"  type="Number" maxLength="5" value="{Postcode}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Weblink" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputWebsite" value="{Weblink}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Beschreibung" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<TextArea id="textArea" value="{Descr}" rows="8"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="PDF zum Angebot" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="false" sameFilenameAllowed="true"
+														noDataText="Sie können hier optional eine PDF Datei zum Angebot hochladen" instantUpload="false" change="onFileSelected" fileType="pdf"
+														fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"
+														uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts">
+														<toolbar>
+															<OverflowToolbar>
+																<ToolbarSpacer/>
+																<UploadCollectionToolbarPlaceholder/>
+															</OverflowToolbar>
+														</toolbar>
+													</UploadCollection>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<!--<VBox class="sapUiContentPadding">-->
+							<!--	<form:Form class="sapUiSmallMarginEnd" width="100%" editable="true" visible="true">-->
+							<!--		<form:title/>-->
+							<!--		<form:formContainers>-->
+							<!--			<form:FormContainer title="Vorschau der Kachel" visible="true">-->
+							<!--				<form:formElements>-->
+							<!--					<form:FormElement visible="true">-->
+							<!--						<form:label></form:label>-->
+							<!--						<form:fields></form:fields>-->
+							<!--					</form:FormElement>-->
+							<!--				</form:formElements>-->
+							<!--				<form:title/>-->
+							<!--			</form:FormContainer>-->
+							<!--		</form:formContainers>-->
+							<!--		<form:layout>-->
+							<!--			<form:ResponsiveGridLayout adjustLabelSpan="true" columnsL="10000" labelSpanL="310000" columnsM="100001" labelSpanM="100002"-->
+							<!--				labelSpanS="1100002"/>-->
+							<!--		</form:layout>-->
+							<!--	</form:Form>-->
+							<!--</VBox>-->
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Vorschau der Kachel"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxPreview" alignContent="Center" justifyContent="Center"
+								class="sapUiContentPadding sapUiSmallMarginEnd">
+							</FlexBox>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

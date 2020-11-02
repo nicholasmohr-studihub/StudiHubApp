@@ -1,0 +1,103 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mosbach.StudiHub.controller.Master"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button visible="{= ${SessionModel>/myUserType} === 'ADMN'}" icon="sap-icon://employee-lookup" press="onAdminPanelPress" text="Nutzer verwalten" type="Attention"/>
+							<Button icon="sap-icon://business-card" press="onMyProfilePress" tooltip="Mein Profil" type="Ghost"/>
+							<Button icon="sap-icon://log" press="onLogoutPress" tooltip="Ausloggen" type="Ghost"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<OverflowToolbar id="otb7" class="sapUiMediumMarginTop">
+						<SegmentedButton id="userSelection" selectionChange="getTiles">
+							<items>
+								<SegmentedButtonItem id="init" text="Alle Posts" key=""/>
+								<SegmentedButtonItem text="Meine Posts" key="X"/>
+							</items>
+						</SegmentedButton>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://refresh" type="Ghost" press="onRefresh"/>
+						<SearchField id="searchBar" width="30%" search="getTiles">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="Low"/>
+							</layoutData>
+						</SearchField>
+						<DateRangeSelection width="30%" id="dateRange" change="getTiles">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="Low"/>
+							</layoutData>
+						</DateRangeSelection>
+					</OverflowToolbar>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Angebote"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://add" text="Jetzt Posten" type="Accept" press="pressNewOffer"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxOffers" width="100%"/>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Karriere"/>
+								<ToolbarSpacer/>
+								<Button visible="{= ${SessionModel>/myUserType} !== 'STDT'}" icon="sap-icon://add" text="Jetzt Posten" type="Accept" press="pressNewCareer"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxCareer"/>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Events"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://add" text="Jetzt Posten" type="Accept" press="pressNewEvent"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxEvent"/>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Wohnungsbörse"/>
+								<ToolbarSpacer/>
+								<Button  icon="sap-icon://add" text="Jetzt Posten" type="Accept" press="pressNewAcomm"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxAccom"/>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Minijobs"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://add" visible="{= ${SessionModel>/myUserType} !== 'STDT'}" text="Jetzt Posten" type="Accept" press="pressNewJob"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxJob"/>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

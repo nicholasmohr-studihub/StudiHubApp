@@ -1,0 +1,144 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mosbach.StudiHub.controller.Signup"
+	xmlns:form="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" text="Abbrechen" press="navToLogin"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<form:Form width="100%" editable="true" visible="true">
+						<form:title/>
+						<form:formContainers>
+							<form:FormContainer title="Allgemeine Informationen" visible="true">
+								<form:formElements>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="Geschlecht" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<ComboBox id="multiBoxStatus" name="Status">
+												<core:Item text="Herr"/>
+												<core:Item text="Frau"/>
+												<core:Item text="Divers"/>
+											</ComboBox>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="Vorname" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="inputFirstname" value="" valueStateText=""/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label  text="Nachname" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="inputLastname" required="false" maxLength="32" value="" valueStateText="" liveChange="onLiveChange"/>
+										</form:fields>
+									</form:FormElement>
+								</form:formElements>
+								<form:title/>
+							</form:FormContainer>
+							<form:FormContainer title="Adressdaten" visible="true">
+								<form:formElements>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="Straße" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="inputStreet" value="" valueStateText=""/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="Ort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="inputCity" value="" valueStateText=""/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label  text="Postleitzahl" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="inputZipcode" value="" valueStateText=""/>
+										</form:fields>
+									</form:FormElement>
+								</form:formElements>
+								<form:title/>
+							</form:FormContainer>
+						</form:formContainers>
+						<form:layout>
+							<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+						</form:layout>
+					</form:Form>
+					<form:Form width="100%" editable="true" visible="true">
+						<form:title/>
+						<form:formContainers>
+							<form:FormContainer title="E-Mail Adresse" visible="true">
+								<form:formElements>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="E-Mail" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id ="inputMail"/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="E-Mail wiederholen" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="confirmMail" value="" valueStateText=""/>
+										</form:fields>
+									</form:FormElement>
+								</form:formElements>
+								<form:title/>
+							</form:FormContainer>
+							<form:FormContainer title="Passwort" visible="true">
+								<form:formElements>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="Passwort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit" />
+										</form:label>
+										<form:fields>
+											<Input id="inputPw" value="" valueStateText="" type="Password"/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement visible="true">
+										<form:label>
+											<Label text="Passwort wiederholen" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+										</form:label>
+										<form:fields>
+											<Input id="confirmPw" value="" valueStateText="" type="Password"/>
+										</form:fields>
+									</form:FormElement>
+								</form:formElements>
+								<form:title/>
+							</form:FormContainer>
+						</form:formContainers>
+						<form:layout>
+							<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+						</form:layout>
+					</form:Form>
+					<FlexBox alignContent="End" justifyContent="End" class="sapUiMediumMargin">
+						<Button icon="sap-icon://accept" text="Jetzt registrieren!" type="Accept" press="onCreateUser"/>
+					</FlexBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

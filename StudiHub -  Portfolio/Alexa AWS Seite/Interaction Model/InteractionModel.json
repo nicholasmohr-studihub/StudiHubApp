@@ -1,0 +1,119 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "öffne studihub",
+            "modelConfiguration": {
+                "fallbackIntentSensitivity": {
+                    "level": "LOW"
+                }
+            },
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "nein",
+                        "stop",
+                        "beende studihub",
+                        "ciao",
+                        "danke"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "readInfosIntent",
+                    "slots": [
+                        {
+                            "name": "QUERY_LIST",
+                            "type": "LIST_OF_QUERY"
+                        }
+                    ],
+                    "samples": [
+                        "{QUERY_LIST}",
+                        "{QUERY_LIST} in mosbach",
+                        "lese meine {QUERY_LIST}",
+                        "lies meine  {QUERY_LIST}",
+                        "welche {QUERY_LIST} git es",
+                        "gibt es neue {QUERY_LIST} ",
+                        "welche {QUERY_LIST} gibt es"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "LIST_OF_QUERY",
+                    "values": [
+                        {
+                            "id": "readCareers",
+                            "name": {
+                                "value": "karriereangebote",
+                                "synonyms": [
+                                    "berufsmöglichkeiten",
+                                    "karrieremöglichkeiten"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "readOffers",
+                            "name": {
+                                "value": "angebote",
+                                "synonyms": [
+                                    "coupons",
+                                    "gutscheine"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "readJobs",
+                            "name": {
+                                "value": "jobs",
+                                "synonyms": [
+                                    "arbeit",
+                                    "job",
+                                    "minijobs",
+                                    "jobangebote"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "readAccom",
+                            "name": {
+                                "value": "immobilien",
+                                "synonyms": [
+                                    "immobilie",
+                                    "wgs",
+                                    "zimmer"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "readEvents",
+                            "name": {
+                                "value": "events",
+                                "synonyms": [
+                                    "veranstaltungen",
+                                    "event",
+                                    "veranstaltung"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,40 @@
+<mvc:View controllerName="Mosbach.StudiHub.controller.LoginView" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<customHeader>
+						<Bar>
+							<contentMiddle>
+								<Title text="{i18n>title}"/>
+							</contentMiddle>
+						</Bar>
+					</customHeader>
+					<content>
+						<f:SimpleForm id="SimpleFormToolbar" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4"
+							labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+							singleContainerFullSize="false" ariaLabelledBy="Title1">
+							<f:content>
+								<Label text="E-Mail" required="true"/>
+								<Input id="inputEmail" value=""/>
+								<Label text="Passwort" required="true"/>
+								<Input id="inputPw" width="100%" value="" type="Password"/>
+								<Label/>
+								<FlexBox>
+									<Button text="Registrieren" type="Transparent" press="onRegisterPress"/>
+								</FlexBox>
+								<FlexBox visible="{device>/system/phone}">
+									<Button text="Login" type="Ghost" press="onLoginPress"/>
+								</FlexBox>
+								<FlexBox alignContent="End" displayInline="true"  justifyContent="End" visible="{= ${device>/system/phone} !== true }">
+									<Button text="Login" type="Ghost" press="onLoginPress"/>
+								</FlexBox>
+							</f:content>
+						</f:SimpleForm>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

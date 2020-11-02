@@ -1,0 +1,197 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mosbach.StudiHub.controller.Profile.DetailProfile" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="pressNavBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button visible="{= ${SessionModel>/myUserType} === 'ADMN'}" icon="sap-icon://employee-lookup" press="onAdminPanelPress" text="Nutzer verwalten" type="Attention"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel width="auto" class="sapUiResponsiveMargin" visible="{= ${Usertype} !== 'STDT'}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="{Company}:"/>
+								<ToolbarSpacer/>
+								<Button text="Profil bearbeiten!" visible="{= ( ${Userid} === ${SessionModel>/myUserId} ) ||  ( ${SessionModel>/myUserType} === 'ADMN' ) }" icon="sap-icon://edit" press="onEditPress"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<MessageStrip customIcon="sap-icon://map-2" text="Ansässig in {Street} in {City} ({Postcode})" showIcon="true" showCloseButton="false"/>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Beschreibung" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<TextArea id="textArea" value="{Beschreibung}" editable="false" rows="8"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<FlexBox alignContent="End" justifyContent="End">
+														<Button tooltip="{Website}" icon="sap-icon://home-share" press="onWeblinkPress" text="Mehr Erfahren" visible="{= ${Website} !== ''}" type="Accept"/>
+													</FlexBox>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true" visible="{= ${Usertype} === 'ADMN'}">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Accountdaten" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="E-Mail Adresse" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputEmail" value="{Email}" editable="false"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Account gültig bis" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DatePicker editable="false" value="{path: 'Expires', type: 'sap.ui.model.type.Date'}"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Letzte Anmeldung" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DatePicker dateValue="{Lastlogin}" editable="false"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin" visible="{= ${Usertype} === 'STDT'}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Profilinformationen:"/>
+								<ToolbarSpacer/>
+								<Button text="Profil bearbeiten!" visible="{= ( ${Userid} === ${SessionModel>/myUserId} ) ||  ( ${SessionModel>/myUserType} === 'ADMN' ) }" press="onEditPress" icon="sap-icon://edit"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Allgemeine Informationen" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Geschlecht" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<ComboBox id="multiBoxStatus" name="Status" editable="false" selectedKey="{Gender}">
+														<core:Item text="Herr" key="Herr"/>
+														<core:Item text="Frau" key="Frau"/>
+														<core:Item text="Divers" key="Divers"/>
+													</ComboBox>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Vorname" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input value="{Firstname}" editable="false" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Nachname" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input required="false" maxLength="32" value="{Lastname}" editable="false" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Account gültig bis" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DatePicker value="{path: 'Expires', type: 'sap.ui.model.type.Date'}" editable="false"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+									<form:FormContainer title="Adressdaten" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Straße" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input value="{Street}" editable="false" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Ort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input value="{City}" editable="false" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Postleitzahl" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input value="{Postcode}" editable="false" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="E-Mail Adresse" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input value="{Email}" editable="false"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

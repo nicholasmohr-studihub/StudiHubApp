@@ -1,0 +1,98 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mosbach.StudiHub.controller.Admin.NewUser"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onAdminPanelPress"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://business-card" press="onMyProfilePress" tooltip="Mein Profil" type="Ghost"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Neuen Nutzer anlegen:"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Nutzertyp" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<SegmentedButton id="userType" width="100%">
+														<items>
+															<SegmentedButtonItem  text="Student" icon="sap-icon://study-leave" key="STDT"/>
+															<SegmentedButtonItem  text="Unternehmen" icon="sap-icon://building" key="CMPN"/>
+															<SegmentedButtonItem  text="Administrator" icon="sap-icon://key-user-settings" key="ADMN"/>
+														</items>
+													</SegmentedButton>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="E-Mail Adresse" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputMail" required="true" value="" editable="true" type="Email" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label  design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Button width="100%" text="Nutzer anlegen!" type="Accept" icon="sap-icon://add-employee" press="onCreateUser"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout />
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="E-Mail mit Passwort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<TextArea id="areaMailPw" rows="8"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout />
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

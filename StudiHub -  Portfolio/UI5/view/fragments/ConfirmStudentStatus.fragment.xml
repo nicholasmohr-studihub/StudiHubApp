@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog	title="Prüfen des Studentenstatus" escapeHandler="onDialogClose">
+		<MessageStrip id="studMsgStripe" text="Geben Sie ihre Matrikelnummer ein um ihren Studentstatus zu verifizieren."/>
+		<Input id="inputStudId" placeholder="Martikelnummer..." maxLength="8"/>
+		<buttons>
+			<Button text="Prüfen" type="Emphasized" press="onValidatePress"/>
+			<Button text="Close" type="Transparent" press="onDialogClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

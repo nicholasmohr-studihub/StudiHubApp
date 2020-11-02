@@ -1,0 +1,36 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mosbach.StudiHub.controller.Admin.AdminPanel"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="navToMaster"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://business-card" press="onMyProfilePress" tooltip="Mein Profil" type="Ghost"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<List id="userList" noDataText="Keine Nutzer gefunden!" items="{/UserSet}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Ansicht aller Nutzer:"/>
+								<ToolbarSpacer/>
+								<Button type="Accept" text="Nutzer anlegen!" icon="sap-icon://add-employee" press="onNewUserPress"/>
+								<!--<Button type="Reject" text="Nutzer löschen!" icon="sap-icon://delete"/>-->
+								<Button type="Ghost" icon="sap-icon://filter"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<StandardListItem title="{Firstname} {Lastname} {Company}" press="onUserPress" type="Navigation" description="{path: 'Usertype', formatter: '.firstLetter'}{Userid}" icon="{= ${Usertype} === 'STDT' ? 'sap-icon://study-leave' : ${Usertype} === 'ADMN' ? 'sap-icon://key-user-settings' : 'sap-icon://building'}" iconDensityAware="false" iconInset="false"/>
+					</List>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

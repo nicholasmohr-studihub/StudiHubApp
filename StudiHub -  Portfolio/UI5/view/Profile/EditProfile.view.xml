@@ -1,0 +1,303 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mosbach.StudiHub.controller.Profile.EditProfile" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="pressNavBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button visible="{= ${SessionModel>/myUserType} === 'ADMN'}" icon="sap-icon://employee-lookup" press="onAdminPanelPress" text="Nutzer verwalten" type="Attention"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel id="panelAdcm" width="auto" class="sapUiResponsiveMargin" visible="{= ${Usertype} !== 'STDT'}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Profilinformationen:"/>
+								<ToolbarSpacer/>
+								<Button id="deleteAdcmBtn" text="Profil Löschen!" type="Reject" icon="sap-icon://edit" press="onDeletePress"/>
+								<Button text="Änderungen speichern" press="onSavePress" type="Accept" icon="sap-icon://save"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Allgemeine Informationen">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="Unternehmen" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCompany" value="{Company}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Webseite" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputWeblink" value="{Website}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Logo" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputLogo" required="false" maxLength="32" value="" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+									<form:FormContainer title="Adressdaten">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="Straße" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputStreetU" value="{Street}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Ort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCityU" value="{City}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Postleitzahl" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputPostcodeU" value="{Postcode}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Beschreibung">
+										<form:formElements>
+											<form:FormElement >
+												<form:label></form:label>
+												<form:fields>
+													<TextArea id="textArea" value="{Beschreibung}" rows="8"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Anmeldedaten">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="E-Mail Adresse" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputEmailU" value="{Email}"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Passwort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Button id="inputPasswwort" text="Passwort Ändern" press="onPasswordPress" icon="sap-icon://key"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Account gültigkeit">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="Account gültig bis:" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DatePicker id="userExpiresU" editable="{= ${Usertype} === 'ADMN'}" value="{path: 'Expires', type: 'sap.ui.model.type.Date'}"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin" visible="{= ${Usertype} === 'STDT'}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Profilinformationen:"/>
+								<ToolbarSpacer/>
+								<Button text="Profil Löschen!" type="Reject" icon="sap-icon://edit" press="onDeletePress"/>
+								<Button text="Änderungen speichern" press="onSavePress" type="Accept" icon="sap-icon://save"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Allgemeine Informationen">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="Geschlecht" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<ComboBox id="comboBoxGender" selectedKey="{Gender}" name="Status">
+														<core:Item text="Herr" key="Herr"/>
+														<core:Item text="Frau" key="Frau"/>
+														<core:Item text="Divers" key="Divers"/>
+													</ComboBox>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label>
+													<Label text="Vorname" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputFirstname" value="{Firstname}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label>
+													<Label text="Nachname" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputLastname" required="false" maxLength="32" value="{Lastname}" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+									<form:FormContainer title="Adressdaten">
+										<form:formElements>
+											<form:FormElement>
+												<form:label>
+													<Label text="Straße" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputStreetS" value="{Street}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Ort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCityS" value="{City}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Postleitzahl" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputPostcodeS" value="{Postcode}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Anmeldedaten">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="E-Mail Adresse" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputEmailS" value="{Email}"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Passwort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Button text="Passwort Ändern" press="onPasswordPress" icon="sap-icon://key"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Account gültigkeit">
+										<form:formElements>
+											<form:FormElement >
+												<form:label>
+													<Label text="Account gültig bis:" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DatePicker id="userExpiresS" editable="{= ${SessionModel>/myUserType} === 'ADMN'}" value="{path: 'Expires', type: 'sap.ui.model.type.Date'}"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,120 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mosbach.StudiHub.controller.Offer.DetailOffer"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:vbm="sap.ui.vbm">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="navToMaster"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://employee-lookup" visible="{= ${SessionModel>/myUserType} === 'ADMN'}" press="onAdminPanelPress"
+								text="Nutzer verwalten" type="Attention"/>
+							<Button icon="sap-icon://business-card" press="onMyProfilePress" tooltip="Mein Profil" type="Ghost"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="{Title}"/>
+								<ToolbarSpacer/>
+								<Button id="userProfileButton" press="onProfilePress"
+									icon="{= ${Usertype} === 'STDT' ? 'sap-icon://study-leave' : ${Usertype} === 'ADMN' ? 'sap-icon://key-user-settings' : 'sap-icon://building'}"
+									type="{= ${Usertype} === 'STDT' ? 'Transparent' : 'Ghost' }" text="{Firstname} {Lastname} {Company}"/>
+								<Button icon="sap-icon://write-new-document" type="Attention" text="Angebot bearbeiten"
+									visible="{= ${Userid} === ${SessionModel>/myUserId} || ${SessionModel>/myUserType} === 'ADMN' }" press="onEditOfferPress"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<MessageStrip customIcon="sap-icon://appointment"
+								text="Gültig vom {path: 'Begda', type: 'sap.ui.model.type.Date'} bis zum {path: 'Endda', type: 'sap.ui.model.type.Date'}" showIcon="true"
+								showCloseButton="false"/>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Mehr Infos zu unserem Angebot" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<TextArea rows="8" value="{Descr}" editable="false"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label></form:label>
+												<form:fields>
+													<FlexBox alignContent="End" justifyContent="End">
+														<Button icon="sap-icon://home-share" text="Mehr Erfahren" tooltip="{Weblink}" type="Accept" press="onWeblinkPress"
+															visible="{= ${Weblink} !== ''}"/>
+													</FlexBox>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin"
+						visible="{= ( ${Street} === '' &amp;&amp; ${Street} === '' &amp;&amp; ${Postcode} === '' &amp;&amp; ${City} === '' &amp;&amp; ${Pdfsource} === '' ) ? false : true}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Details"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<l:Splitter visible="{= !${device>/system/phone} }">
+								<l:contentAreas>
+									<PDFViewer source="{Pdfsource}" height="600px" showDownloadButton="false">
+										<layoutData>
+											<l:SplitterLayoutData
+												size="{= ${Pdfsource} === '' ? '0%' : ${Pdfsource} !== '' &amp;&amp; ( ${Street} !== '' || ${Postcode} !== '' || ${City} !== '' ) ? '50%' : '100%' }"
+												resizable="false"/>
+										</layoutData>
+									</PDFViewer>
+									<vbm:GeoMap id="vbi" width="100%" height="600px"/>
+								</l:contentAreas>
+							</l:Splitter>
+							<VBox visible="{= ${device>/system/phone} === true || ${device>/system/tablet} === true}">
+							<PDFViewer source="{Pdfsource}" height="600px" showDownloadButton="false" visible="{= ${Pdfsource} !== ''}">
+								<layoutData>
+									<l:SplitterLayoutData
+										size="{= ${Pdfsource} === '' ? '0%' : ${Pdfsource} !== '' &amp;&amp; ( ${Street} !== '' || ${Postcode} !== '' || ${City} !== '' ) ? '50%' : '100%' }"
+										resizable="false"/>
+								</layoutData>
+							</PDFViewer>
+							<vbm:GeoMap id="vbiMobile" width="100%" height="600px"/>
+							</VBox>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Kommentare"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FeedInput post="onComment" icon="sap-icon://post"/>
+							<List showSeparators="Inner" id="commentList" noDataText="Keine Kommentare vorhanden">
+								<FeedListItem id="template" sender="{Uname}" icon="" senderPress="onSenderPress" iconPress="onIconPress" iconDensityAware="false" info=""
+									timestamp="{Createddate}, {Createdtime}" text="{Text}" convertLinksToAnchorTags="All"/>
+							</List>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

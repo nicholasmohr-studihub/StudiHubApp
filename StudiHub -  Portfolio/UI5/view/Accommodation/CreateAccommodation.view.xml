@@ -1,0 +1,195 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:vbm="sap.ui.vbm"
+	controllerName="Mosbach.StudiHub.controller.Accomodation.CreateAccommodation" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="navToMaster"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://employee-lookup" visible="{= ${SessionModel>/myUserType} === 'ADMN'}" press="onAdminPanelPress" text="Nutzer verwalten" type="Attention"/>
+							<Button icon="sap-icon://business-card" press="onMyProfilePress" tooltip="Mein Profil" type="Ghost"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Panel id="panelData" width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Neues Inserat posten:"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Daten zum Inserat" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Titel" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputHeader" required="true" value="" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Von - Bis" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<DateRangeSelection id="dateRange" required="true" change="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Warmmiete" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputPrice" maxLength="4" required="true" value="" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Zimmer" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<StepInput id="inputRooms" value="1" min="1"  required="true" step="0.5" displayValuePrecision="1" max="99" change="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Wohnfläche in qm" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputNumber" maxLength="5" value="" required="true" editable="true" valueStateText="" liveChange="onLiveChange"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+									<form:FormContainer title="Adressdaten" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Username" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCompany" required="true" value="{Firstname} {Lastname} {Company}" editable="false" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Straße"  design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputStreet" required="true" value="{Street}" editable="true" change="onLiveChange" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Ort" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputCity" required="true" value="{City}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Postleitzahl" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputPostcode"  type="Number" maxLength="5" required="true" value="{Postcode}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement visible="true">
+												<form:label>
+													<Label text="Weblink" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+												</form:label>
+												<form:fields>
+													<Input id="inputWebsite" value="{Website}" editable="true" valueStateText=""/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="Beschreibung" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<TextArea id="textArea" rows="8"/>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+							<form:Form width="100%" editable="true" visible="true">
+								<form:title/>
+								<form:formContainers>
+									<form:FormContainer title="PDF zum Inserat" visible="true">
+										<form:formElements>
+											<form:FormElement visible="true">
+												<form:label></form:label>
+												<form:fields>
+													<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="false" sameFilenameAllowed="true"
+														noDataText="Sie können hier optional eine PDF Datei zum Angebot hochladen" instantUpload="false" change="onFileSelected" fileType="pdf"
+														fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"
+														uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts">
+														<toolbar>
+															<OverflowToolbar>
+																<ToolbarSpacer/>
+																<UploadCollectionToolbarPlaceholder/>
+															</OverflowToolbar>
+														</toolbar>
+													</UploadCollection>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+										<form:title/>
+									</form:FormContainer>
+								</form:formContainers>
+								<form:layout>
+									<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+								</form:layout>
+							</form:Form>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Vorschau der Kachel"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<content>
+							<FlexBox id="flexBoxPreview" alignContent="Center" justifyContent="Center" class="sapUiContentPadding sapUiSmallMarginEnd"></FlexBox>
+							<FlexBox alignContent="Center" justifyContent="Center" class="sapUiContentPadding sapUiSmallMarginEnd">
+								<Button press="onSavePress" icon="sap-icon://add-document" text="Jetzt Inserat posten!"/>
+							</FlexBox>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
